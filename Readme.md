@@ -1,6 +1,6 @@
 WRITE UP FOR DOCUSIGN
 
-1.  Tell us about your React experience (lifecycles, hooks, reusable components)
+	1.  Tell us about your React experience (lifecycles, hooks, reusable components)?
  
 React Component Lifecycle
     I have extensive experience working with React's component lifecycle methods:
