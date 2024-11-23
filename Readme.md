@@ -47,21 +47,21 @@ This function returns a React element and is used by the component to render par
  
 Flux/Redux Pattern: Implementing unidirectional data flow for state management in complex applications.
  
-4. Do you have any experience making React accessible?
+	4. Do you have any experience making React accessible?
 I worked in different organizations to ensure the application is accessible to users with disabilities by following accessibility guidelines like WCAG.
 Also, tools like NVDA can be used to test and improve accessibility.
  
-5. What is your experience with package management?
+	5. What is your experience with package management?
 The two most common package managers used with React projects are:
 npm stands for Node Package Manager and is used to manage dependencies for your React project, including the React Library itself.
 Yarn: An alternative to npm developed by Facebook. Yarn tool is used to download the libraries in a faster manner in React.
 	 
  
-6. Testing experience and do you have experience with Jest and PlayWright
+	6. Testing experience and do you have experience with Jest and PlayWright?
 I have significant hands-on experience using Jest for JavaScript testing. Jest is a popular JavaScript testing framework often used with React. 
 It is commonly used with React because it provides a simple and powerful testing solution with features like snapshot testing, coverage reporting, and built-in assertions.
  
-7. Overall experience with CSS and APIs
+	7. Overall experience with CSS and APIs?
 CSS and APIs is used to create polished, responsive front-end interfaces that efficiently communicate with back-end services, resulting in performant and user-friendly web applications.
 	
 	
