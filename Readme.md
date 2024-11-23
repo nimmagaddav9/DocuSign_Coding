@@ -25,10 +25,10 @@ Creating Reusable Components
 Overall, my experience spans the full React component lifecycle, modern hooks-based development, and creating scalable component architectures. 
 I'm passionate about writing clean, efficient, and reusable React code.
 	 
-2. How would you rate your expertise with React?
+	2. How would you rate your expertise with React?
 I would rate my expertise with React as advanced. I've been working extensively with React for over 5+ years now.
  
-3. Explain your experience with design systems and design patterns?
+	3. Explain your experience with design systems and design patterns?
 
 Design Systems Experience
 Design systems are crucial for maintaining consistency and efficiency in front-end development. I have experience working with and contributing to design systems in the following ways:
