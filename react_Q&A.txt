@@ -1,0 +1,335 @@
+Q1: Hooks?
+
+Hooks are a new addition in React 16.8. They let you use state and other React features without writing a class.
+Hooks are backwards-compatible. 
+
+1. useState
+2. useEffect
+3. useContext
+4. useReducer
+5. useMemo
+6. useCallback
+7. useRef
+
+useState: Manages state in functional components.  
+useEffect: Manages side effects in functional components. 
+useContext: Consumes context in functional components.  manage global state.
+useReducer: Manages state with a reducer function. For more  complex state management
+useRef: Accesses DOM elements or stores mutable values.  
+useCallback: performance improvement usecase  
+useMemo: performance improvement usecase
+
+
+useState Hook ? example?
+Manage component state.
+
+import React, {useState} from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    return(
+        <div>
+        <p> you clicked {count} times </p>
+        <button onClick = {()=> setCount(count + 1)}>Click Me</button>
+        </div>
+    )
+}
+
+export default Counter;
+
+// output
+// you clicked 7 times
+
+button --> Click Me
+
+---------------------------------------------------------------------------
+useEffect hook What? manage side effects?
+useEffect is a hook that manages side effects like data fetching, subscriptions, or manually changing the DOM.
+
+import React, {useEffect, useState} from "react";
+
+function DataFetcher(){
+    useEffect(()=>{}, []); // empty array means this effect runs only once.
+    useEffect(()=>{}, [depedency]); // runs if depedency value changes
+    useEffect(()=>{
+        return () => {};
+    }, []); // cleanup method
+
+    return <div></div>;
+}
+
+export default DataFetcher;
+
+=======================================================================================
+
+how to implement data fetching in react js?
+
+import React, {useEffect, useState} from "react";
+
+function DataFetchingExample(){
+    const [data, setData] = useState(null);
+
+    async function fetchData(){
+        const response = await fetch("api-endpoint");
+        const result = await response.json();
+
+        if (result) setData(result);
+    }
+
+    useEffect(()=>{
+        fetchData();
+    }, []); // empty array means this effects runs only once
+    return <div>{data ? data.title : "Loading..."}</div>;
+}
+
+export default DataFetchingExample;
+
+===============================================
+
+How to manage loading state?
+
+import React, {useEffect, useState} from "react";
+
+function DataFetchingExample(){
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    async function fetchData(){
+        setLoading(true)
+        const response = await fetch("api-endpoint");
+        const result = await response.json();
+
+        if (result) {
+            setData(result);
+            setLoading(false);
+    }
+    }
+    if(loading) return <h1> Loading data! please wait</h1>
+
+    useEffect(()=>{
+        fetchData();
+    }, []); // empty array means this effects runs only once
+
+    return <div>{data ? data.title : "Loading..."}</div>;
+}
+
+export default DataFetchingExample;
+
+========================================================================
+
+
+
+
+
+High order components what ? Why? When?
+Machine coding round?
+
+
+Lifecycle method of components, class component?
+
+Mounting
+Updating
+Unmounting
+
+9-10 methods
+
+================================================================================
+
+#state management 
+
+State/props
+Prop drilling, write code example?
+Context
+
+
+What is prop drilling and how to avoid it?
+prop drilling occurs when you pass data through many layers of components.
+It can be avoided using the context API or state management libraries like redux.
+
+function CompA(){
+    return <CompB title="prop drilling" />
+}
+
+function compB({title}){
+    return <CompC title={title} />
+}
+
+function CompC({title}){
+    return <CompD title={title} />
+}
+
+function CompD({title}){
+    return <h3>{title}</h3>
+}
+=====================================================
+Context API? why is it used?
+
+Context API in React provides a way to share values (like data or functions) between components without having to pass props through every level of the component tree.
+It is used to avoid prop drilling.
+
+Context --> Global State
+
+
+ A              B      C    D  (using in all components)
+
+
+
+import React, { createContext } from 'react';
+
+
+// create a Context
+const MyContext = createContext();
+
+// Provider component
+export default function MyProvider({children}){
+    const value = "Hello, world!";
+    return (
+        <MyContext.Provider value={value}>
+          {children}
+        </MyContext.Provider>
+    );
+}
+
+
+// wrap the context
+
+export default function App(){
+    return <MyProvider><div>Child Components</div></MyProvider>
+}
+==========================================================================
+
+How do you consume context using the useContext hook?
+The useContext hook allows functional components to access context values directly.
+
+import React, {useContext} from 'react';
+import {MyContext} from './MyProvider';
+
+function MyComponent(){
+    const value = useContext(MyContext);
+    return <div>{value}</div>
+}
+
+
+Redux/ zustand
+How redux works? Why? When? If application is needed?
+
+
+Redux toolkit, rtk
+
+
+Custom hooks
+When?
+
+Clean, readable, reusable
+
+Code
+
+Example?
+
+
+Lazy loading v.imp highly asked
+ Code splitting 
+Chunking 
+Suspense
+
+Performance is important
+
+Virtual DOM? Why?  
+Reconciliation 
+React fiber
+Diffing algorithm 
+Render works?
+
+
+
+SSR vs CSR
+Server side rendering vs client side rendering 
+
+Difference? Benefits?
+
+SEO 
+Performance 
+
+
+
+Routing(RBAC) role base access control
+
+	- React router
+	- How do you manage protected routes?
+	- Query params
+	- Dynamic routing
+	- X.com/username /profile how to handle?
+
+
+
+Testing
+
+React testing
+
+
+Async task useEffect in depth.
+Api calls
+Events
+Promises
+Fetch 
+Axiousfetch?
+
+
+
+Reusability
+Modularity
+Testability
+Readability 
+
+
+
+Performance *******system design round
+Rendering of components faster
+Lazy loading
+Asset optimization , js code, image
+Bundler
+CDN
+Writing optimized code.
+
+
+
+#styling
+	- Tailwind 
+	- Style x - facebook comeup with new way
+	- Bootstrap
+	- Material ui
+	- Anti Ui
+	- Css / scss / inline
+	- Pros vs cons
+
+
+Accessibility -
+Security 
+Performance 
+Testing 
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
