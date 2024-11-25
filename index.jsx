@@ -62,7 +62,12 @@ export default MoveToFirstList;
 
 	2. How to pass context to children component and how to use them?
 
-	Context
+What is React Context?
+React Context provides us a way to pass data down through the component tree to where we need it without having to manually pass props at every single level.
+
+It acts as a global storage space for all your components in your project.
+
+Context
 This acts as the storage where the data is stored. It comes with two parts:
 
 createContext() — This creates the global object and creates the context.
