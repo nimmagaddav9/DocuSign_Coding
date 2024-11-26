@@ -117,23 +117,149 @@ function DataFetchingExample(){
 export default DataFetchingExample;
 
 ========================================================================
+What is the useReducer hook, and when should you use it?
+
+alternative of useState.
+The useReducer hook is used for state management in React.
+It is suitable for handling more complex state logic compared to useState.
+
+import React, { useReducer } from 'react';
+
+function App(){
+const initialState = { count : 0 };
+
+function reducer(state, action) {
+    switch(action.type) {
+        case 'increment':
+        return {count: state.count + 1};
+        case 'decrement':
+        return { count : state.count - 1 };
+        default:
+        throw new Error();
+    }
+}
+
+function Counter() {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    return(
+        <div>
+        <p>Count: {state.count}</p>
+        <button onClick={()=> dispatch({type:'increment'})}>+</button>
+        <button onClick={()=> dispatch({type: 'decrement'})}>-</button>
+        </div>
+    );
+}
+}
+
+export default App;
 
 
-
+================================================================
 
 
 High order components what ? Why? When?
+
+A Higher-Order Component (HOC) is a function that takes a  component and returns a new component with added functionality. 
+HOCs are used for reusing component logic and enhancing components with additional behavior.
+
 Machine coding round?
 
+import React, { useState } from 'react';
+
+const withLoading = (Component) => {
+    return class withLoading extends React.Component {
+        state = { isLoading: true };
+
+        componentDidMount() {
+            setTimeout(()=>{
+                this.setState({isLoading: false});
+            }, 1000);
+        }
+
+        render() {
+            if(this.state.isLoading){
+                return <p>Loading....</p>
+            }
+            return <Component {...this.props} />
+        }
+    };
+};
+
+const MyComponent = () =>{
+    return <h1>Component is Loaded!</h1>
+};
+
+export default withLoading(MyComponent);
+=======================================================
 
 Lifecycle method of components, class component?
 
-Mounting
-Updating
-Unmounting
+React component lifecycle has three categories – Mounting, Updating and Unmounting.
+Mounting – Birth of your component
+Update – Growth of your component
+Unmount – Death of your component
 
-9-10 methods
+React Component LifeCycle Hooks
 
+        1. constructor
+        2. componentWillMount()
+        3. render()
+        4. componentDidMount()
+        5. componentWillReceiveProps()
+        6. shouldComponentUpdate()
+
+        // component kill methods
+
+        7. componentWillUpdate()
+        8. componentDidUpdate()
+        9. componentWillUnmount()
+
+# Constructor()
+
+        constructor will execute at booting time of component --constructor will execute only once
+        Define state in constructor
+
+# componentWillMount()
+
+        componentWillMount() will execute after constructor
+        componentWillMount() will execute only once
+        in general we will do the initial modifications in state
+        in general we will set global parameters like width, height
+
+# render()
+
+        after componentWillMount() automatically render() function will execute
+        render() is mandatory lifecycle hook(main lifecycle hook)
+        in general, we will place presentation logic in render()
+        when ever change detected in state or props automatically this lifecycle hooks will execute
+
+# componentDidMount()
+
+        after render function immediately componentDidMount() life cycle hook will execute
+        in general we will make asynchronous calls in ComponentWillMount()
+        this is recommended state to change the state of component
+
+# componentWillReceiveProps()
+
+        when component will receive props from redux
+
+# shouldComponentUpdate()
+
+        if we want to update the state return "true" else "false"
+
+# UNSAFE_componentWillUpdate()
+
+        death method --> perform cleanup operations
+
+# componentDidUpdate()
+
+        if we integrate any third party UI elements
+        plugin logic will write here
+
+# componentWillUnmount()
+
+        Before killing the component componentWillUnmount is executed.
+        death method --> perform cleanup operations
 ================================================================================
 
 #state management 
@@ -202,15 +328,54 @@ export default function App(){
 How do you consume context using the useContext hook?
 The useContext hook allows functional components to access context values directly.
 
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import {MyContext} from './MyProvider';
 
 function MyComponent(){
     const value = useContext(MyContext);
-    return <div>{value}</div>
+    return <div>{value}</div>;
 }
 
+export default MyComponent;
 
+===============================================================================
+
+How can you update context values?
+
+import React, {createContext, useState} from 'react';
+
+const MyContext = createContext();
+
+function MyProvider({children}){
+    const [value, setValue] = useState("hello, world!");
+    return (
+        <MyContext.Provider value={{value, setValue}}>
+        {children}
+        </MyContext.Provider>
+    );
+}
+
+function MyComponent() {
+    const {value, setValue} = useContext(MyContext);
+    return (
+        <div>
+        <p>{value}</p>
+        <button onClick= {()=> setValue("New Value")}>Update</button>
+        </div>
+    );
+}
+
+========================================================================
+What are the advantages of using the Context API over prop drilling?
+Context API reduces the need for prop drilling, making the code more readable  and maintainable. 
+It allows for easy sharing of state and functions across the  component tree without passing props through every level.
+
+
+// with Context API
+<MyProvider>
+    <GrandChild />
+</MyProvider>
+==============================================================
 Redux/ zustand
 How redux works? Why? When? If application is needed?
 
